@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mark Investment Dashboard</title>
+
+<style>
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+margin:0;
+font-family:Arial;
+background:#0b1220;
+color:white;
+}
+
+.sidebar{
+width:220px;
+height:100vh;
+background:#111827;
+position:fixed;
+padding:20px;
+}
+
+.sidebar h2{
+color:#22c55e;
+margin-bottom:20px;
+}
+
+.sidebar a{
+display:block;
+color:#cbd5e1;
+padding:12px;
+text-decoration:none;
+border-radius:8px;
+margin-bottom:5px;
+}
+
+.sidebar a:hover{
+background:#1f2937;
+}
+
+.main{
+margin-left:240px;
+padding:20px;
+}
+
+.top{
+background:#111827;
+padding:20px;
+border-radius:12px;
+margin-bottom:20px;
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:15px;
+margin-top:20px;
+}
+
+.card{
+background:#111827;
+padding:20px;
+border-radius:12px;
+border:1px solid #1f2937;
+}
+
+.section{
+margin-top:20px;
+background:#111827;
+padding:20px;
+border-radius:12px;
+}
+
+button{
+padding:10px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+}
+
+.deposit{background:#22c55e;color:white;}
+.withdraw{background:#ef4444;color:white;}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+<h2>MARK INVEST</h2>
+
+<a href="#home">Home</a>
+<a href="#invest">Invest</a>
+<a href="#assets">Assets</a>
+<a href="#transactions">Transactions</a>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+<!-- TOP -->
+<div class="top" id="home">
+<h2>Dashboard</h2>
+<p id="userEmail">Loading...</p>
+</div>
+
+<!-- CARDS -->
+<div class="cards">
+
+<div class="card">
+<h3>Balance</h3>
+<p id="balance">$0.00</p>
+</div>
+
+<div class="card">
+<h3>Profit</h3>
+<p id="profit">$0.00</p>
+</div>
+
+<div class="card">
+<h3>Invested</h3>
+<p id="invested">$0.00</p>
+</div>
+
+</div>
+
+<!-- ASSETS -->
+<div class="section" id="assets">
+<h3>Crypto Assets</h3>
+<p>BTC: 0.0000</p>
+<p>ETH: 0.0000</p>
+<p>USDT: 0.0000</p>
+</div>
+
+<!-- INVEST -->
+<div class="section" id="invest">
+<h3>Investment Plans</h3>
+
+<button class="deposit">Basic Plan</button>
+<button class="deposit">Silver Plan</button>
+</div>
+
+<!-- TRANSACTIONS -->
+<div class="section" id="transactions">
+<h3>Transaction History</h3>
+<div id="transactionsList">No transactions yet</div>
+</div>
+
+<!-- ACTIONS -->
+<div class="section">
+<button class="deposit" id="depositBtn">Deposit</button>
+<button class="withdraw" id="withdrawBtn">Withdraw</button>
+</div>
+
+</div>
+
+<script type="module" src="dashboard.js"></script>
+
+</body>
+</html>
