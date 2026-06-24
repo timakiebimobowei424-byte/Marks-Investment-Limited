@@ -153,18 +153,22 @@ Need assistance? Contact our support team.
 <div class="card" style="max-width:800px;margin:auto;">
 
 <input
+id="fullName"
 type="text"
 placeholder="Full Name">
 
 <input
+id="email"
 type="email"
 placeholder="Email Address">
 
 <input
+id="subject"
 type="text"
 placeholder="Subject">
 
 <textarea
+id="message"
 placeholder="Enter Message"
 style="
 width:100%;
@@ -176,18 +180,16 @@ border-radius:15px;
 background:#1f2937;
 color:white;
 resize:none;
-">
-
-</textarea>
+"></textarea>
 
 <button
+id="sendMessageBtn"
 class="btn primary"
 style="margin-top:20px;width:100%;">
 
 Send Message
 
 </button>
-
 </div>
 
 </section>
@@ -401,6 +403,136 @@ Resources and platform tools
 <script>
 document.getElementById("openBtn").onclick=function(){window.location.href="register.html";}
 document.getElementById("loginBtn").onclick=function(){window.location.href="login.html";}
+</script>
+  <script type="module">
+
+import { db }
+from "./config.js";
+
+import {
+collection,
+addDoc,
+serverTimestamp
+}
+from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+
+
+document
+.getElementById(
+"sendMessageBtn"
+)
+
+.onclick = async()=>{
+
+let name=
+document
+.getElementById(
+"fullName"
+).value;
+
+let email=
+document
+.getElementById(
+"email"
+).value;
+
+let subject=
+document
+.getElementById(
+"subject"
+).value;
+
+let message=
+document
+.getElementById(
+"message"
+).value;
+
+
+if(
+name=="" ||
+email=="" ||
+subject=="" ||
+message==""
+){
+
+alert(
+"Please fill all fields"
+);
+
+return;
+
+}
+
+
+try{
+
+await addDoc(
+
+collection(
+db,
+"contactMessages"
+),
+
+{
+
+name:name,
+
+email:email,
+
+subject:subject,
+
+message:message,
+
+time:
+serverTimestamp()
+
+}
+
+);
+
+
+alert(
+"Message sent successfully"
+);
+
+
+document
+.getElementById(
+"fullName"
+).value="";
+
+document
+.getElementById(
+"email"
+).value="";
+
+document
+.getElementById(
+"subject"
+).value="";
+
+document
+.getElementById(
+"message"
+).value="";
+
+}
+
+catch(error){
+
+alert(
+"Error sending message"
+);
+
+console.log(
+error
+);
+
+}
+
+};
+
 </script>
 </body>
 </html>
