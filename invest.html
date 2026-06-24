@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width,initial-scale=1">
+
+<title>Investment Plans</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+
+min-height:100vh;
+padding-bottom:90px;
+overflow-x:hidden;
+color:white;
+
+background:
+linear-gradient(
+rgba(8,17,32,.88),
+rgba(8,17,32,.95)
+);
+
+}
+
+body::before{
+
+content:"";
+position:fixed;
+
+width:500px;
+height:500px;
+
+background:#22c55e;
+
+filter:blur(180px);
+
+top:-150px;
+left:-100px;
+
+opacity:.2;
+
+animation:move1 10s infinite alternate;
+
+}
+
+body::after{
+
+content:"";
+position:fixed;
+
+width:450px;
+height:450px;
+
+background:#3b82f6;
+
+filter:blur(180px);
+
+bottom:-150px;
+right:-100px;
+
+opacity:.2;
+
+animation:move2 10s infinite alternate;
+
+}
+
+@keyframes move1{
+
+100%{
+
+transform:
+translate(150px,100px);
+
+}
+
+}
+
+@keyframes move2{
+
+100%{
+
+transform:
+translate(-150px,-100px);
+
+}
+
+}
+
+.header{
+
+padding:25px;
+position:relative;
+z-index:2;
+
+}
+
+.header h2{
+
+font-size:32px;
+
+}
+
+.header span{
+
+color:#22c55e;
+
+}
+
+.header p{
+
+margin-top:10px;
+color:#cbd5e1;
+
+}
+
+.stats{
+
+display:grid;
+
+grid-template-columns:
+repeat(3,1fr);
+
+gap:10px;
+
+padding:15px;
+position:relative;
+z-index:2;
+
+}
+
+.stat{
+
+background:
+rgba(17,24,39,.9);
+
+padding:15px;
+
+border-radius:15px;
+
+text-align:center;
+
+backdrop-filter:blur(10px);
+
+}
+
+.stat h3{
+
+color:#22c55e;
+
+margin-bottom:5px;
+
+}
+
+.plan{
+
+background:
+rgba(17,24,39,.9);
+
+margin:15px;
+
+padding:20px;
+
+border-radius:25px;
+
+backdrop-filter:blur(10px);
+
+box-shadow:
+0 0 35px rgba(0,0,0,.4);
+
+position:relative;
+
+z-index:2;
+
+}
+
+.green{
+
+background:
+linear-gradient(
+135deg,
+#22c55e,
+#16a34a
+);
+
+padding:20px;
+
+border-radius:18px;
+
+margin-bottom:15px;
+
+}
+
+.badge{
+
+position:absolute;
+
+top:15px;
+right:15px;
+
+background:#3b82f6;
+
+padding:6px 12px;
+
+border-radius:20px;
+
+font-size:12px;
+
+font-weight:bold;
+
+}
+
+.progress{
+
+width:100%;
+height:8px;
+
+background:#1f2937;
+
+border-radius:10px;
+
+margin-top:10px;
+
+overflow:hidden;
+
+}
+
+.progress span{
+
+display:block;
+
+height:100%;
+width:85%;
+
+background:#22c55e;
+
+}
+
+button{
+
+width:100%;
+
+padding:15px;
+
+margin-top:15px;
+
+border:none;
+
+border-radius:12px;
+
+background:#22c55e;
+
+color:white;
+
+font-size:16px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+transition:.4s;
+
+}
+
+button:hover{
+
+transform:
+translateY(-2px);
+
+}
+
+.modal{
+
+display:none;
+
+position:fixed;
+
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+background:
+rgba(0,0,0,.7);
+
+justify-content:center;
+align-items:center;
+
+z-index:999;
+
+}
+
+.box{
+
+width:90%;
+max-width:400px;
+
+background:
+rgba(17,24,39,.95);
+
+padding:30px;
+
+border-radius:25px;
+
+backdrop-filter:blur(15px);
+
+}
+
+.box h3{
+
+margin-bottom:15px;
+
+}
+
+input{
+
+width:100%;
+
+padding:15px;
+
+border:none;
+outline:none;
+
+border-radius:12px;
+
+background:#1f2937;
+
+color:white;
+
+margin-top:10px;
+
+}
+
+.bottom{
+
+position:fixed;
+
+bottom:0;
+width:100%;
+
+background:
+rgba(17,24,39,.95);
+
+display:flex;
+
+justify-content:space-around;
+
+padding:18px;
+
+backdrop-filter:blur(15px);
+
+}
+
+.bottom a{
+
+text-decoration:none;
+color:white;
+
+}
+
+.bottom a:hover{
+
+color:#22c55e;
+
+}
+
+@media(max-width:600px){
+
+.stats{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+
+<h2>
+
+Mark <span>Investment</span>
+
+</h2>
+
+<p>
+
+Choose a plan and grow your portfolio
+
+</p>
+
+</div>
+
+<div class="stats">
+
+<div class="stat">
+
+<h3>$120M+</h3>
+
+<p>Assets</p>
+
+</div>
+
+<div class="stat">
+
+<h3>25K+</h3>
+
+<p>Investors</p>
+
+</div>
+
+<div class="stat">
+
+<h3>98%</h3>
+
+<p>Success</p>
+
+</div>
+
+</div>
+
+<div class="plan">
+
+<div class="badge">
+
+POPULAR
+
+</div>
+
+<div class="green">
+
+<h2>Basic Plan</h2>
+
+<p>Duration: 1 Week</p>
+
+<p>Profit: 10% + Capital</p>
+
+</div>
+
+<p>Minimum: $700</p>
+
+<p>Maximum: $2500</p>
+
+<div class="progress">
+<span></span>
+</div>
+
+<button onclick="openInvest()">
+
+Invest
+
+</button>
+
+</div>
+
+<div class="plan">
+
+<div class="green">
+
+<h2>Silver Plan</h2>
+
+<p>Duration: 1 Week</p>
+
+<p>Profit: 15% + Capital</p>
+
+</div>
+
+<p>Minimum: $2001</p>
+
+<p>Maximum: $5000</p>
+
+<div class="progress">
+<span style="width:70%">
+</span>
+</div>
+
+<button onclick="openInvest()">
+
+Invest
+
+</button>
+
+</div>
+
+<div class="modal"
+id="investModal">
+
+<div class="box">
+
+<h3>
+
+Enter Investment Amount
+
+</h3>
+
+<input
+type="number"
+id="amount"
+placeholder="USD Amount">
+
+<button
+id="confirmInvest">
+
+Continue Investment
+
+</button>
+
+</div>
+
+</div>
+
+<div class="bottom">
+
+<a href="dashboard.html">
+Home
+</a>
+
+<a href="invest.html">
+Invest
+</a>
+
+<a href="trade.html">
+Trade
+</a>
+
+<a href="assets.html">
+Assets
+</a>
+
+<a href="profile.html">
+Profile
+</a>
+
+</div>
+
+<script>
+
+function openInvest(){
+
+document
+.getElementById(
+"investModal"
+)
+.style.display=
+"flex";
+
+}
+
+document
+.getElementById(
+"confirmInvest"
+)
+
+.onclick=function(){
+
+let amount=
+
+document
+.getElementById(
+"amount"
+)
+.value;
+
+if(amount<1){
+
+alert(
+"Enter amount"
+);
+
+return;
+
+}
+
+alert(
+
+"Investment request: $"
++amount
+
+);
+
+};
+
+</script>
+
+</body>
+</html>
