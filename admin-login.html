@@ -29,6 +29,8 @@ button{width:100%;padding:15px;border:none;border-radius:12px;background:#22c55e
 
 <script type="module">
 
+alert("Admin script loaded");
+
 import { auth } from "./config.js";
 
 import {
@@ -37,32 +39,25 @@ signOut
 }
 from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
 
-const allowedAdmins=[
-"marksinvestmentltd@gmail.com"
-];
+const loginBtn=
+document.getElementById("loginBtn");
 
 const status=
 document.getElementById("status");
 
-document
-.getElementById("loginBtn")
-.onclick=async()=>{
+console.log(loginBtn);
+
+loginBtn.addEventListener(
+"click",
+async()=>{
+
+alert("Button clicked");
 
 const email=
-document.getElementById("email")
-.value.trim();
+document.getElementById("email").value.trim();
 
 const password=
-document.getElementById("password")
-.value;
-
-if(!email||!password){
-
-alert("Enter email and password");
-
-return;
-
-}
+document.getElementById("password").value;
 
 status.innerText=
 "Signing in...";
@@ -76,10 +71,14 @@ email,
 password
 );
 
+alert("Firebase login worked");
+
 const user=
 userCredential.user;
 
-if(!allowedAdmins.includes(user.email)){
+if(
+user.email!=="marksinvestmentltd@gmail.com"
+){
 
 await signOut(auth);
 
@@ -89,24 +88,21 @@ return;
 
 }
 
-alert("Login successful");
-
 window.location.href=
 "admin-dashboard.html";
 
 }catch(error){
 
-console.log(error);
-
 alert(error.message);
 
-status.innerText=
-error.message;
+console.log(error);
 
 }
 
-};
+}
+);
 
 </script>
+
 </body>
 </html>
